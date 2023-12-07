@@ -1,0 +1,79 @@
+.codePage {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+textarea {
+  width: 100%;
+  resize: none;
+  font-family: "Anonymous Pro", monospace;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+}
+textarea:focus {
+  outline: none;
+}
+.codeArea {
+  width: 95%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+.areaTag {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  color: #d9d1bf;
+  padding: 0.2rem 0;
+  margin: 0;
+  width: 100.5%;
+  background-color: #2c3136;
+}
+#codeText {
+  height: 40vh;
+}
+#ipText,
+#opText {
+  height: 15vh;
+}
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+  color: #a4a4a4;
+}
+.runArea {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.runArea select,
+.runArea button {
+  font-size: 0.8rem;
+  padding: 1px 6px;
+  height: 1.5rem;
+  outline: none;
+  border-radius: 5px;
+}
+.runArea button {
+  background-color: rgb(11, 161, 11);
+  color: white;
+  border: none;
+}
+.codeArea .loader {
+  position: absolute;
+  top: 10%;
+}
+
+@media only screen and (max-width: 1200px) {
+  textarea {
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+}
