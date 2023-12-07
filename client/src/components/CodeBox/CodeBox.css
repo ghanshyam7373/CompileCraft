@@ -33,9 +33,6 @@ textarea:focus {
   width: 100.5%;
   background-color: #2c3136;
 }
-#codeText {
-  height: 40vh;
-}
 #ipText,
 #opText {
   height: 15vh;

@@ -2,16 +2,21 @@ import React, { useRef, useState } from "react";
 import "./CodeBox.css";
 import Languages from "../../data/Languages";
 import Loader from "../Loader/Loader";
+import Editor from "@monaco-editor/react";
 
 const CodeBox = () => {
   const [loading, setLoading] = useState(false);
   const [output, setOutput] = useState("");
-  const [ipCode, setIpCode] = useState("");
   const [ipInput, setIpInput] = useState("");
   const [ipLang, setIpLang] = useState("python3");
+  const editorRef = useRef(null);
 
   const handleCode = async () => {
-    const ipData = { language: ipLang, code: ipCode, input: ipInput };
+    const ipData = {
+      language: ipLang,
+      code: editorRef.current.getValue(),
+      input: ipInput,
+    };
     try {
       console.log("hello", import.meta.env.VITE_API_BASE_URL);
       setLoading(true);
@@ -39,32 +44,20 @@ const CodeBox = () => {
       console.error("Error:", error);
     }
   };
-
-  const handleIpCode = (e) => {
-    setIpCode(e.target.value);
-  };
   const handleIpInput = (e) => {
     setIpInput(e.target.value);
   };
   const handleIpLang = (e) => {
     setIpLang(e.target.value);
   };
-
-  const handleTab = (event) => {
-    if (event.key === "Tab") {
-      event.preventDefault();
-      const start = event.target.selectionStart;
-      const end = event.target.selectionEnd;
-      const newCode = ipCode.substring(0, start) + "\t" + ipCode.substring(end);
-      setIpCode(newCode);
-      event.target.selectionStart = event.target.selectionEnd = start + 1;
-    }
-  };
+  function handleEditorDidMount(editor, monaco) {
+    editorRef.current = editor;
+  }
 
   return (
     <div className="codePage">
       <div className="title">
-        DevBoard
+        CompileCraft
         <div className="runArea">
           <select
             name="codeLang"
@@ -85,13 +78,14 @@ const CodeBox = () => {
       </div>
       <div className="codeArea">
         <p className="areaTag">Code</p>
-        <textarea
-          value={ipCode}
-          onChange={handleIpCode}
-          name="codeText"
+        <Editor
           id="codeText"
-          onKeyDown={handleTab}
+          name="codeText"
+          height="40vh"
+          defaultLanguage={ipLang}
+          onMount={handleEditorDidMount}
         />
+        ;
       </div>
       <div className="codeArea">
         <p className="areaTag">Input</p>
