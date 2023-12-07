@@ -13,14 +13,18 @@ const CodeBox = () => {
   const handleCode = async () => {
     const ipData = { language: ipLang, code: ipCode, input: ipInput };
     try {
+      console.log("hello", import.meta.env.VITE_API_BASE_URL);
       setLoading(true);
-      const response = await fetch("http://localhost:3001/api/compiler", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(ipData),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/compiler`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(ipData),
+        }
+      );
 
       const data = await response.json();
       setLoading(false);
@@ -49,18 +53,10 @@ const CodeBox = () => {
   const handleTab = (event) => {
     if (event.key === "Tab") {
       event.preventDefault();
-
-      // Get the current cursor position
       const start = event.target.selectionStart;
       const end = event.target.selectionEnd;
-
-      // Insert a tab character at the cursor position
       const newCode = ipCode.substring(0, start) + "\t" + ipCode.substring(end);
-
-      // Update the state with the new text
       setIpCode(newCode);
-
-      // Move the cursor to the right position
       event.target.selectionStart = event.target.selectionEnd = start + 1;
     }
   };
