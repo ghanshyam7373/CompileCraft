@@ -1,16 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
 
 .homePage {
-  width: 100vw;
-  /* padding-right: 1rem; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.whiteBoard {
+  width: 50%;
+  z-index: 1;
   background-color: #212529;
 }
-.c-QTiTL-jvfJsl-side-right {
-  margin-right: 16px;
-}
-.c-kuOiws {
-  padding: 0 !important;
-}
-.c-itYKbw {
+.tlui-debug-panel {
   display: none;
+}
+.codePad {
+  width: 50%;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  background-color: rebeccapurple;
 }
